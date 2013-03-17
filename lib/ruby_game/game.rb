@@ -5,8 +5,8 @@ module RubyGame
     def initialize(width, height, player, ruby)
       super(width, height, false)
       self.caption = "Ruby Game"
-      @player = player
-      @ruby = ruby
+      @player, @ruby = player, ruby
+      @player.init_limits(width, height, 15, 40)
       @objects = [player, ruby]
       @objects.each {|object| object.init_image(self)}
       @background_image = Gosu::Image.new(self, File.join(RubyGame::IMAGES_PATH, 'background.png'), true)
