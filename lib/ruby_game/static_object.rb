@@ -1,5 +1,8 @@
+require 'forwardable'
 module RubyGame
   class StaticObject
+    extend Forwardable
+    def_delegator :@image, :width
     attr_accessor :x, :y
 
     def initialize(x, y, image_name)
