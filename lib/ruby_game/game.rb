@@ -7,6 +7,7 @@ module RubyGame
       self.caption = "Ruby Game"
       @background_image = Gosu::Image.new(self, File.join(RubyGame::IMAGES_PATH, 'background.png'), true)
       @font = Gosu::Font.new(self, Gosu::default_font_name, 60)
+      @directions = %w(up down left right)
     end
 
     def update
@@ -15,6 +16,7 @@ module RubyGame
         @player.move_right if button_down? Gosu::Button::KbRight
         @player.move_up if button_down? Gosu::Button::KbUp
         @player.move_down if button_down? Gosu::Button::KbDown
+        @monster.send("move_#{@directions.sample}")
 
         self.won! if @player.touch?(@ruby)
       end
@@ -41,12 +43,17 @@ module RubyGame
       @objects << ruby
     end
 
+    def monster(monster)
+      @monster = monster
+      @objects << monster
+    end
+
     def start!(&block)
       @objects = []
       @init = block if block_given?
       @init.call(self)
       @objects.each {|object| object.init_image(self)}
-      @player.init_limits(width, height, 15, 40)
+      [@player, @monster].each {|moving_object| moving_object.init_limits(width, height, 15, 40)}
       @state = :run
       self.show if block_given?
     end
