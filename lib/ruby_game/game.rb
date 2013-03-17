@@ -2,15 +2,11 @@ require 'gosu'
 
 module RubyGame
   class Game < Gosu::Window
-    def initialize(width, height, player, ruby)
+    def initialize(width, height)
       super(width, height, false)
       self.caption = "Ruby Game"
       @background_image = Gosu::Image.new(self, File.join(RubyGame::IMAGES_PATH, 'background.png'), true)
       @font = Gosu::Font.new(self, Gosu::default_font_name, 60)
-      @player, @ruby = player, ruby
-      @player.init_limits(width, height, 15, 40)
-      @objects = [player, ruby]
-      @objects.each {|object| object.init_image(self)}
     end
 
     def update
@@ -32,12 +28,29 @@ module RubyGame
 
     def button_down(id)
       close if id == Gosu::Button::KbEscape
+      self.restart! if id == Gosu::Button::KbR
     end
 
-    def start!
-      @state = :run
-      self.show
+    def player(player)
+      @player = player
+      @objects << player
     end
+
+    def ruby(ruby)
+      @ruby = ruby
+      @objects << ruby
+    end
+
+    def start!(&block)
+      @objects = []
+      @init = block if block_given?
+      @init.call(self)
+      @objects.each {|object| object.init_image(self)}
+      @player.init_limits(width, height, 15, 40)
+      @state = :run
+      self.show if block_given?
+    end
+    alias_method :restart!, :start!
 
     def won!
       @state = :won
