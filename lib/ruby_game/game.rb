@@ -30,6 +30,10 @@ module RubyGame
       @objects.each {|object| object.draw}
     end
 
+    def button_down(id)
+      close if id == Gosu::Button::KbEscape
+    end
+
     def start!
       @state = :run
       self.show
