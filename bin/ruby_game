@@ -12,5 +12,5 @@ game = RubyGame::Game.new(640, 480)
 game.start! do
   player RubyGame::Player.new(590, 420)
   ruby RubyGame::Ruby.new(65, 115)
-  monsters Array.new(5) {RubyGame::Monster.build(:ghost)}
+  monsters RubyGame::Monster.build(:ghost, 5)
 end
