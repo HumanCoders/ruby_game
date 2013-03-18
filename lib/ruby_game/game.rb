@@ -27,7 +27,7 @@ module RubyGame
       @background_image.draw(0, 0, 0)
       @font.draw("You won!", 200, 240, 2, 1.0, 1.0, 0xffffff00) if self.won?
       @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.gameover?
-      @objects.each {|object| object.draw}
+      [@ruby, @player, @monster].each {|object| object.draw}
     end
 
     def button_down(id)
@@ -38,15 +38,13 @@ module RubyGame
     %w(player ruby monster).each do |object|
       define_method object do |value|
         instance_variable_set("@#{object}", value)
-        @objects << value
       end
     end
 
     def start!(&block)
-      @objects = []
       @init = block if block_given?
       @init.call(self)
-      @objects.each {|object| object.init_image(self)}
+      [@ruby, @player, @monster].each {|object| object.init_image(self)}
       [@player, @monster].each {|moving_object| moving_object.init_limits(width, height, 15, 40)}
       @state = :run
       self.show if block_given?
