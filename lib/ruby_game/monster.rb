@@ -8,6 +8,7 @@ module RubyGame
       super
       @velocity = 3
       @actions = []
+      @action_index = 0
     end
 
     def self.build(name)
@@ -37,6 +38,16 @@ module RubyGame
     def action(direction, options = {})
       opts = {velocity: @velocity, repeat: 1}.merge options
       @actions += Array.new(opts[:repeat]) {Action.new(direction, opts[:velocity])}
+    end
+
+    def execute
+      next_index = @action_index % @actions.length
+      action = @actions[next_index]
+      default_velocity = @velocity
+      @velocity = action.velocity
+      self.send(action.direction)
+      @velocity = default_velocity
+      @action_index = next_index + 1
     end
   end
 end

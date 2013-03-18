@@ -3,9 +3,9 @@ require File.expand_path('../lib/ruby_game', File.dirname(__FILE__))
 
 RubyGame::Monster.define :ghost do |m|
   m.image_name "ghost"
-  m.velocity 2
-  m.action :move_up, velocity: 4, repeat: 5
-  m.action :move_down, velocity: 4, repeat: 5
+  m.velocity 3
+  m.action :move_up, velocity: 2, repeat: 80
+  m.action :move_down, velocity: 2, repeat: 80
 end
 
 game = RubyGame::Game.new(640, 480)
