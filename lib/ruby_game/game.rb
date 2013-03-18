@@ -16,10 +16,13 @@ module RubyGame
         @player.move_right if button_down? Gosu::Button::KbRight
         @player.move_up if button_down? Gosu::Button::KbUp
         @player.move_down if button_down? Gosu::Button::KbDown
-        @monster.send("move_#{@directions.sample}")
+
+        @monsters.each do |monster|
+          monster.send("move_#{@directions.sample}")
+          self.gameover! if monster.touch?(@player)
+        end
 
         self.won! if @player.touch?(@ruby)
-        self.gameover! if @monster.touch?(@player)
       end
     end
 
@@ -27,7 +30,7 @@ module RubyGame
       @background_image.draw(0, 0, 0)
       @font.draw("You won!", 200, 240, 2, 1.0, 1.0, 0xffffff00) if self.won?
       @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.gameover?
-      [@ruby, @player, @monster].each {|object| object.draw}
+      ([@ruby, @player] + @monsters).each {|object| object.draw}
     end
 
     def button_down(id)
@@ -35,17 +38,22 @@ module RubyGame
       self.restart! if id == Gosu::Button::KbR
     end
 
-    %w(player ruby monster).each do |object|
+    def monsters(monsters)
+      @monsters += monsters
+    end
+
+    %w(player ruby).each do |object|
       define_method object do |value|
         instance_variable_set("@#{object}", value)
       end
     end
 
     def start!(&block)
+      @monsters = []
       @init = block if block_given?
       @init.call(self)
-      [@ruby, @player, @monster].each {|object| object.init_image(self)}
-      [@player, @monster].each {|moving_object| moving_object.init_limits(width, height, 15, 40)}
+      ([@ruby, @player] + @monsters).each {|object| object.init_image(self)}
+      ([@player] + @monsters).each {|moving_object| moving_object.init_limits(width, height, 15, 40)}
       @state = :run
       self.show if block_given?
     end
