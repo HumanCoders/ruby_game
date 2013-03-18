@@ -21,9 +21,9 @@ module RubyGame
       @y = rand border_top_with..(max_height - 2*border_top_with)
     end
 
-    def self.define(name)
+    def self.define(name, &block)
       monster = Monster.new
-      yield(monster)
+      monster.instance_eval(&block)
       @@monsters[name] = monster
     end
 

@@ -50,7 +50,7 @@ module RubyGame
     def start!(&block)
       @monsters = []
       @init = block if block_given?
-      @init.call(self)
+      self.instance_eval(&@init)
       ([@ruby, @player] + @monsters).each {|object| object.init_image(self)}
       ([@player] + @monsters).each {|moving_object| moving_object.init_limits(width, height, 15, 40)}
       @state = :run
