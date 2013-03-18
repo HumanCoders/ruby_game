@@ -1,9 +1,16 @@
 #!/usr/bin/env ruby
 require File.expand_path('../lib/ruby_game', File.dirname(__FILE__))
 
+RubyGame::Monster.define :ghost do |m|
+  m.image_name "ghost"
+  m.velocity 2
+  m.action :move_up, velocity: 4, repeat: 5
+  m.action :move_down, velocity: 4, repeat: 5
+end
+
 game = RubyGame::Game.new(640, 480)
 game.start! do |g|
   g.player RubyGame::Player.new(590, 420)
   g.ruby RubyGame::Ruby.new(65, 115)
-  g.monsters Array.new(5) {RubyGame::Monster.new}
+  g.monsters Array.new(5) {RubyGame::Monster.build(:ghost)}
 end
