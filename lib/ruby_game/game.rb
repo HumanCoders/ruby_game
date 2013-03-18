@@ -19,12 +19,14 @@ module RubyGame
         @monster.send("move_#{@directions.sample}")
 
         self.won! if @player.touch?(@ruby)
+        self.gameover! if @monster.touch?(@player)
       end
     end
 
     def draw
       @background_image.draw(0, 0, 0)
       @font.draw("You won!", 200, 240, 2, 1.0, 1.0, 0xffffff00) if self.won?
+      @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.gameover?
       @objects.each {|object| object.draw}
     end
 
@@ -69,6 +71,14 @@ module RubyGame
 
     def won?
       @state == :won
+    end
+
+    def gameover!
+      @state = :gameover
+    end
+
+    def gameover?
+      @state == :gameover
     end
   end
 end
