@@ -21,6 +21,11 @@ module RubyGame
       @y = rand border_top_with..(max_height - 2*border_top_with)
     end
 
+    def forward(player)
+      @x += player.x <=> @x
+      @y += player.y <=> @y
+    end
+
     def self.define(name, &block)
       monster = Monster.new
       monster.instance_eval(&block)
@@ -40,12 +45,16 @@ module RubyGame
       @actions += Array.new(opts[:repeat]) {Action.new(direction, opts[:velocity])}
     end
 
-    def execute
+    def execute(player)
       next_index = @action_index % @actions.length
       action = @actions[next_index]
       default_velocity = @velocity
       @velocity = action.velocity
-      self.send(action.direction)
+      if action.direction == :forward
+        self.send(action.direction, player)
+      else
+        self.send(action.direction)
+      end
       @velocity = default_velocity
       @action_index = next_index + 1
     end
