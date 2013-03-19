@@ -11,7 +11,7 @@ module RubyGame
     end
 
     def touch?(object)
-      Math.hypot(object.x - @x, object.y - @y) <= 1
+      Math.hypot(object.x - @x, object.y - @y) <= object.width/2
     end
 
     def move_left(velocity = @velocity)
