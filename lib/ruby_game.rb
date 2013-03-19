@@ -1,7 +1,9 @@
 require_relative "ruby_game/static_object"
+require_relative "ruby_game/moving_object"
 require_relative "ruby_game/ruby"
 require_relative "ruby_game/player"
 require_relative "ruby_game/game"
+require_relative "ruby_game/monster"
 require_relative "ruby_game/version"
 
 module RubyGame
