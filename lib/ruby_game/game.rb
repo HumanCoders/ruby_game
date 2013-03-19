@@ -9,6 +9,7 @@ module RubyGame
       @player = player
       @ruby = ruby
       [@player, @ruby].each {|object| object.init_image(self)}
+      @player.init_limits(width, height, 15, 40)
     end
 
     def update
