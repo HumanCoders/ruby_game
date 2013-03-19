@@ -2,15 +2,11 @@ require 'gosu'
 
 module RubyGame
   class Game < Gosu::Window
-    def initialize(player, ruby)
+    def initialize
       super(640, 480, false)
       self.caption = "Ruby Game"
       @background_image = Gosu::Image.new(self, File.join(IMAGES_PATH, 'background.png'), true)
       @font = Gosu::Font.new(self, Gosu::default_font_name, 60)
-      @player = player
-      @ruby = ruby
-      [@player, @ruby].each {|object| object.init_image(self)}
-      @player.init_limits(width, height, 15, 40)
     end
 
     def update
@@ -30,9 +26,20 @@ module RubyGame
       [@player, @ruby].each {|object| object.draw}
     end
 
+    def player(player)
+      @player = player
+    end
+
+    def ruby(ruby)
+      @ruby = ruby
+    end
+
     def start!
-      @state = :run
-      self.show
+       yield(self)
+       [@player, @ruby].each {|object| object.init_image(self)}
+       @player.init_limits(width, height, 15, 40)
+       @state = :run
+       self.show
     end
 
     def won!
