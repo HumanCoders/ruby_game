@@ -9,8 +9,8 @@ module RubyGame
       @actions = []
     end
 
-    def self.build(name)
-      @@monsters[name].clone
+    def self.build(name, number = 1)
+      Array.new(number) {@@monsters[name].clone}
     end
 
     def init_limits(max_width, max_height, border_with, border_top_with)
