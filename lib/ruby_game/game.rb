@@ -26,6 +26,10 @@ module RubyGame
       [@player, @ruby].each {|object| object.draw}
     end
 
+    def button_down(id)
+      self.close if id == Gosu::Button::KbEscape
+    end
+
     def player(player)
       @player = player
     end
