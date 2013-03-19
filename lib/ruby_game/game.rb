@@ -17,7 +17,7 @@ module RubyGame
         @player.move_down if button_down? Gosu::Button::KbDown
 
         @monsters.each do |monster|
-          monster.forward(@player, 1)
+          monster.execute(@player)
           self.gameover! if monster.touch?(@player)
         end
 

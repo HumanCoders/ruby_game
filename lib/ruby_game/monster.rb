@@ -42,5 +42,15 @@ module RubyGame
       opts = {velocity: @velocity, repeat: 1}.merge options
       @actions += Array.new(opts[:repeat]) {Action.new(direction, opts[:velocity])}
     end
+
+    def execute(player)
+      @actions_enum ||= @actions.cycle
+      action = @actions_enum.next
+      if action.direction == :forward
+        self.send(action.direction, player, action.velocity)
+      else
+        self.send(action.direction, action.velocity)
+      end
+    end
   end
 end
