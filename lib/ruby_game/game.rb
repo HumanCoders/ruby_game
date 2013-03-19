@@ -16,6 +16,8 @@ module RubyGame
         @player.move_up if button_down? Gosu::Button::KbUp
         @player.move_down if button_down? Gosu::Button::KbDown
 
+        @monster.forward(@player, 1)
+
         self.won! if @player.touch?(@ruby)
       end
     end
