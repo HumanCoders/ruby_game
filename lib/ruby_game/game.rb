@@ -35,16 +35,10 @@ module RubyGame
       self.restart! if id == Gosu::Button::KbR
     end
 
-    def monster(monster)
-      @monster = monster
-    end
-
-    def player(player)
-      @player = player
-    end
-
-    def ruby(ruby)
-      @ruby = ruby
+    %w(player ruby monster).each do |object|
+      define_method object do |value|
+        instance_variable_set("@#{object}", value)
+      end
     end
 
     def start!(&block)
@@ -55,29 +49,20 @@ module RubyGame
       @state = :run
       self.show if block_given?
     end
-
-    def restart!
-      start!
-    end
+    alias_method :restart!, :start!
 
     def won!
       @state = :won
-    end
-
-    def run?
-      @state == :run
-    end
-
-    def won?
-      @state == :won
     end
 
     def gameover!
       @state = :gameover
     end
 
-    def gameover?
-      @state == :gameover
+    %w(won run gameover).each do |state|
+      define_method "#{state}?" do
+        @state == state.to_sym
+      end
     end
   end
 end
