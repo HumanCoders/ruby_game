@@ -5,5 +5,5 @@ game = RubyGame::Game.new
 game.start! do |g|
   g.player RubyGame::Player.new(590, 420)
   g.ruby RubyGame::Ruby.new(65, 115)
-  g.monster RubyGame::Monster.new
+  g.monsters Array.new(5) {RubyGame::Monster.new}
 end
