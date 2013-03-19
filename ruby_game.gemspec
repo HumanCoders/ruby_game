@@ -3,10 +3,10 @@ require File.expand_path('../lib/ruby_game/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Matthieu Segret"]
-  gem.email         = ["matthieu.segret@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.email         = ["matthieu@humancoders.com"]
+  gem.description   = %q{Ruby Game est un jeu pour apprendre à développer avec Ruby}
+  gem.summary       = %q{Ruby Game est un jeu pour apprendre à développer avec Ruby}
+  gem.homepage      = "http://formations.humancoders.com/formations/ruby"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "ruby_game"
   gem.require_paths = ["lib"]
   gem.version       = RubyGame::VERSION
+
+  gem.add_dependency "gosu"
 end
