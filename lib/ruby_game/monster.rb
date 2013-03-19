@@ -24,9 +24,9 @@ module RubyGame
       @y += (player.y <=> @y) * velocity
     end
 
-    def self.define(name)
+    def self.define(name, &block)
       monster = Monster.new
-      yield(monster)
+      monster.instance_eval(&block)
       @@monsters[name] = monster
     end
 
