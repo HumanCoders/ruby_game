@@ -28,6 +28,7 @@ module RubyGame
 
     def button_down(id)
       self.close if id == Gosu::Button::KbEscape
+      self.restart! if id == Gosu::Button::KbR
     end
 
     def player(player)
@@ -38,12 +39,17 @@ module RubyGame
       @ruby = ruby
     end
 
-    def start!
-       yield(self)
-       [@player, @ruby].each {|object| object.init_image(self)}
-       @player.init_limits(width, height, 15, 40)
-       @state = :run
-       self.show
+    def start!(&block)
+      @init = block if block_given?
+      @init.call(self)
+      [@player, @ruby].each {|object| object.init_image(self)}
+      @player.init_limits(width, height, 15, 40)
+      @state = :run
+      self.show if block_given?
+    end
+
+    def restart!
+      start!
     end
 
     def won!
