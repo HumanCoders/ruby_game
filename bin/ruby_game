@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require File.expand_path('../lib/ruby_game', File.dirname(__FILE__))
+
+game = RubyGame::Game.new
+game.start!
