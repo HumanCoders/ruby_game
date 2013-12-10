@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-require File.expand_path('../lib/ruby_game', File.dirname(__FILE__))
-
-game = RubyGame::Game.new
-game.start! do |g|
-  g.player RubyGame::Player.new(590, 420)
-  g.ruby RubyGame::Ruby.new(65, 115)
-  g.monster RubyGame::Monster.new
-end
