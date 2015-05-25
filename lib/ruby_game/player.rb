@@ -1,15 +1,7 @@
 module RubyGame
-  class Player
-    attr_accessor :x, :y
-
+  class Player < StaticObject
     def initialize(window, x, y, image_name = 'player')
-      @x, @y = x, y
-      @image_name = image_name
-      @image = Gosu::Image.new(window, File.join(IMAGES_PATH, "#{@image_name}.png"), true)
-    end
-
-    def draw
-      @image.draw_rot(@x, @y, 1, 0)
+      super
     end
   end
 end
