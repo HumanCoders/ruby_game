@@ -17,7 +17,7 @@ module RubyGame
 
     def draw
       @background_image.draw(0, 0, 0)
-      [@player, @ruby].each {|object| object.draw}
+      [@player, @ruby, @monster].each {|object| object.draw}
     end
 
     def start
@@ -33,6 +33,11 @@ module RubyGame
     def ruby(x, y)
       @ruby = Ruby.new(x, y)
       @ruby.init_image(self)
+    end
+
+    def monster(x, y)
+      @monster = Monster.new(x, y)
+      @monster.init_image(self)
     end
   end
 end
