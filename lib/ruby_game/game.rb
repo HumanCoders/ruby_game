@@ -13,6 +13,8 @@ module RubyGame
       @player.move_right if button_down?(Gosu::Button::KbRight)
       @player.move_up if button_down?(Gosu::Button::KbUp)
       @player.move_down if button_down?(Gosu::Button::KbDown)
+
+      @monster.follow(@player)
     end
 
     def draw
