@@ -16,8 +16,11 @@ module RubyGame
         @player.move_up if button_down?(Gosu::Button::KbUp)
         @player.move_down if button_down?(Gosu::Button::KbDown)
 
-        @monster.follow(@player)
-        self.lost! if @monster.touch?(@player)
+        @monsters.each do |monster|
+          monster.follow(@player)
+          self.lost! if monster.touch?(@player)
+        end
+
         self.win! if @player.touch?(@ruby)
       end
     end
@@ -26,10 +29,11 @@ module RubyGame
       @background_image.draw(0, 0, 0)
       @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.lost?
       @font.draw("You win !", 200, 240, 2, 1.0, 1.0, 0xffffff00) if self.win?
-      [@player, @ruby, @monster].each {|object| object.draw}
+      ([@player, @ruby] + @monsters).each {|object| object.draw}
     end
 
     def start!
+      @monsters = []
       yield(self)
       self.run!
       self.show
@@ -45,9 +49,12 @@ module RubyGame
       @ruby.init_image(self)
     end
 
-    def monster(x, y)
-      @monster = Monster.new(x, y)
-      @monster.init_image(self)
+    def monsters(number)
+      number.times do
+        monster = Monster.new
+        monster.init_image(self)
+        @monsters << monster
+      end
     end
 
     def lost!
