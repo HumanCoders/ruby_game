@@ -25,6 +25,10 @@ module RubyGame
       end
     end
 
+    def button_down(id)
+      self.close if id == Gosu::Button::KbEscape
+    end
+
     def draw
       @background_image.draw(0, 0, 0)
       @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.lost?
