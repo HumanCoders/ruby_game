@@ -1,6 +1,6 @@
 module RubyGame
   class Player < StaticObject
-    def initialize(window, x, y, image_name = 'player')
+    def initialize(x, y, image_name = 'player')
       super
       @speed = 3
     end
