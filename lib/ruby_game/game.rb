@@ -18,12 +18,14 @@ module RubyGame
 
         @monster.follow(@player)
         self.lost! if @monster.touch?(@player)
+        self.win! if @player.touch?(@ruby)
       end
     end
 
     def draw
       @background_image.draw(0, 0, 0)
       @font.draw("Game Over", 175, 240, 2, 1.0, 1.0, 0xffffff00) if self.lost?
+      @font.draw("You win !", 200, 240, 2, 1.0, 1.0, 0xffffff00) if self.win?
       [@player, @ruby, @monster].each {|object| object.draw}
     end
 
@@ -54,6 +56,14 @@ module RubyGame
 
     def lost?
       @state == :lost
+    end
+
+    def win!
+      @state = :win
+    end
+
+    def win?
+      @state == :win
     end
 
     def run!
