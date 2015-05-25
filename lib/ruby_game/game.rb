@@ -12,6 +12,3 @@ module RubyGame
     end
   end
 end
-
-game = RubyGame::Game.new
-game.start
