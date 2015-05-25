@@ -14,5 +14,9 @@ module RubyGame
     def draw
       @image.draw_rot(@x, @y, 1, 0)
     end
+
+    def touch?(target)
+      Math.hypot(target.x - @x, target.y - @y) <= @image.width / 2
+    end
   end
 end
