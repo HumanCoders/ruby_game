@@ -1,3 +1,4 @@
+require_relative "ruby_game/player"
 require_relative "ruby_game/game"
 
 module RubyGame

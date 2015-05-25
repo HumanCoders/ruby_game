@@ -6,12 +6,12 @@ module RubyGame
       super(640, 480, false)
       self.caption = "Ruby Game"
       @background_image = Gosu::Image.new(self, File.join(IMAGES_PATH, 'background.png'), true)
-      @player_image = Gosu::Image.new(self, File.join(IMAGES_PATH, 'player.png'), true)
+      @player = Player.new(self, 590, 420)
     end
 
     def draw
       @background_image.draw(0, 0, 0)
-      @player_image.draw(560, 400, 0)
+      @player.draw
     end
 
     def start
