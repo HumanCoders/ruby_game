@@ -45,18 +45,14 @@ module RubyGame
       self.show if block_given?
     end
 
-    def restart!
-      self.start!
-    end
+    alias_method :restart!, :start!
 
-    def player(x, y)
-      @player = Player.new(x, y)
-      @player.init_image(self)
-    end
-
-    def ruby(x, y)
-      @ruby = Ruby.new(x, y)
-      @ruby.init_image(self)
+    %w(player ruby).each do |type|
+      define_method(type) do |x, y|
+        object = Object.const_get("RubyGame::#{type.capitalize}").new(x, y)
+        object.init_image(self)
+        instance_variable_set("@#{type}", object)
+      end
     end
 
     def monsters(number)
@@ -67,28 +63,15 @@ module RubyGame
       end
     end
 
-    def lost!
-      @state = :lost
+    %w(lost win run).each do |state|
+      define_method "#{state}!" do
+        @state = state.to_sym
+      end
+
+      define_method "#{state}?" do
+        @state == state.to_sym
+      end
     end
 
-    def lost?
-      @state == :lost
-    end
-
-    def win!
-      @state = :win
-    end
-
-    def win?
-      @state == :win
-    end
-
-    def run!
-      @state = :run
-    end
-
-    def run?
-      @state == :run
-    end
   end
 end
