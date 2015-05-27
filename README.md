@@ -1,39 +1,6 @@
-# RubyGame
+# Ruby Game
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby_game`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ateliers de la **[formation Ruby](https://www.humancoders.com/formations/ruby "Formation Ruby chez Human Coders")** chez **[Human Coders](https://www.humancoders.com "Human Coders")**.
+Ces ateliers consistent au développement d'un jeu développé avec **[Gosu](https://www.libgosu.org/)**.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'ruby_game'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ruby_game
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/ruby_game/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+![jsgame](https://s3.amazonaws.com/f.cl.ly/items/0F0Q3Z2Q3g123t303e1H/Capture%20d%E2%80%99e%CC%81cran%202015-04-29%20a%CC%80%2014.49.57.png)
