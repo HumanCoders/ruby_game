@@ -1,5 +1,3 @@
-require 'gosu'
-
 module RubyGame
   class Game < Gosu::Window
     def initialize

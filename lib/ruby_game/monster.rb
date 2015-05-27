@@ -9,7 +9,7 @@ module RubyGame
 
     def initialize(x = 0, y = 0, image_name = 'ghost1')
       super
-      @speed = 1
+      @speed = 2
       @actions = []
     end
 
@@ -44,9 +44,9 @@ module RubyGame
       @speed = speed
     end
 
-    def follow(target = @target)
-      @x += (target.x <=> @x) * @speed
-      @y += (target.y <=> @y) * @speed
+    def follow(speed = @speed)
+      @x += (@target.x <=> @x) * speed
+      @y += (@target.y <=> @y) * speed
     end
   end
 end
