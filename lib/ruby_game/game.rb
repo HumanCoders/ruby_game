@@ -17,7 +17,7 @@ module RubyGame
         @player.move_down if button_down?(Gosu::Button::KbDown)
 
         @monsters.each do |monster|
-          monster.follow(@player)
+          monster.execute
           self.lost! if monster.touch?(@player)
         end
 
@@ -59,6 +59,7 @@ module RubyGame
       number.times do
         monster = Monster.build(type)
         monster.init_image(self)
+        monster.target = @player
         @monsters << monster
       end
     end

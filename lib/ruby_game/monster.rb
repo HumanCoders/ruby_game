@@ -1,6 +1,9 @@
 module RubyGame
   class Monster < StaticObject
 
+    include Movable
+
+    attr_accessor :target
     @@monsters_type = {}
     Action = Struct.new(:direction, :speed)
 
@@ -23,6 +26,16 @@ module RubyGame
       @@monsters_type[type] = monster
     end
 
+    def action(direction, speed: @speed, repeat: 1)
+      @actions += Array.new(repeat) {Action.new(direction, speed)}
+    end
+
+    def execute
+      @actions_enum ||= @actions.cycle
+      action = @actions_enum.next
+      self.send(action.direction, action.speed)
+    end
+
     def image_name(image_name)
       @image_name = image_name
     end
@@ -31,11 +44,7 @@ module RubyGame
       @speed = speed
     end
 
-    def action(direction, speed: @speed, repeat: 1)
-      @actions += Array.new(repeat) {Action.new(direction, speed)}
-    end
-
-    def follow(target)
+    def follow(target = @target)
       @x += (target.x <=> @x) * @speed
       @y += (target.y <=> @y) * @speed
     end
