@@ -55,9 +55,9 @@ module RubyGame
       end
     end
 
-    def monsters(number)
+    def monsters(type: :ghost1, number: 1)
       number.times do
-        monster = Monster.new
+        monster = Monster.build(type)
         monster.init_image(self)
         @monsters << monster
       end
