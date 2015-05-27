@@ -15,14 +15,14 @@ module RubyGame
 
     def self.build(type)
       monster = @@monsters_type[type].clone
-      monster.x = rand(0..400)
-      monster.y = rand(0..400)
+      monster.x = rand(100..500)
+      monster.y = rand(100..400)
       monster
     end
 
-    def self.define(type)
+    def self.define(type, &block)
       monster = Monster.new
-      yield(monster)
+      monster.instance_eval(&block)
       @@monsters_type[type] = monster
     end
 

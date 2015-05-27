@@ -40,7 +40,7 @@ module RubyGame
     def start!(&block)
       @monsters = []
       @init = block if block_given?
-      @init.call(self)
+      self.instance_eval(&@init)
       self.run!
       self.show if block_given?
     end
